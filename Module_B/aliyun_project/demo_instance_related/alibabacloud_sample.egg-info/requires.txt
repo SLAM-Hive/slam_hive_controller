@@ -1,0 +1,7 @@
+alibabacloud_darabonba_array<1.0.0,>=0.0.1
+alibabacloud_darabonba_env<1.0.0,>=0.0.1
+alibabacloud_darabonba_number<1.0.0,>=0.0.4
+alibabacloud_ecs20140526<3.0.0,>=2.1.0
+alibabacloud_tea_console<1.0.0,>=0.0.1
+alibabacloud_tea_openapi<1.0.0,>=0.3.1
+alibabacloud_tea_util<1.0.0,>=0.3.5

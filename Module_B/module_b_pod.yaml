@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: moudulebcopy
+  namespace: default
+spec:
+  # nodeName: node2
+  nodeName: node1
+  containers:
+  - name: moudulebcopy
+    image: module_b:v314copy
+    command: ['sh','-c','echo "hello" && sleep 360000']
+    ## 
+    env:
+      - name: MY_POD_NAME
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.name
+      - name: MY_POD_NAMESPACE
+        valueFrom:
+          fieldRef:
+            fieldPath: metadata.namespace
+    imagePullPolicy: IfNotPresent
+    securityContext:
+      privileged: true
+    volumeMounts:
+    # 创建docker container
+      - name: dockersock
+        mountPath: /var/run/docker.sock
+      - name: k8spath
+        mountPath: /root/.kube/config
+      - name: algopath
+        mountPath: /slamhive/algo
+      - name: datasetpath
+        mountPath: /slamhive/dataset
+      - name: detailedresultpath
+        mountPath: /slamhive/detailedResult
+      # - name: codepath
+      #   mountPath: /home/code/project
+    # 需要挂载的本地路径
+
+    # 为了便于开发，让pod先运行在node1上
+    # 所以需要暂时修改挂载的路径
+    # clusternfs
+  volumes:
+    - name: dockersock
+      hostPath:
+        path: /var/run/docker.sock
+    - name: k8spath
+      hostPath:
+        path: /root/.kube/config
+    - name: algopath
+      hostPath:
+        # path: /home/SLAM_Hive_root/SLAM_Hive/slam_hive_algos
+        path: /clusternfs/home/SLAM_Hive_root/SLAM_Hive/slam_hive_algos
+    - name: datasetpath
+      hostPath:
+        # path: /home/SLAM_Hive_root/SLAM_Hive/slam_hive_datasets
+        path: /clusternfs/home/SLAM_Hive_root/SLAM_Hive/slam_hive_datasets
+    - name: detailedresultpath
+      hostPath:
+        # path: /home/Combination_result/slam_hive_results/mapping_results/999
+        path: /clusternfs/home/Combination_result/slam_hive_results/mapping_results/999
+    # - name: codepath
+    #   hostPath:
+    #     path: /home/robot1/lxz/dockera/Module_B/project

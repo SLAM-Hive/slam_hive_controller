@@ -13,6 +13,7 @@ project
 ## project
 controller_xxx_run.py
  - used to call controller_xxx.py
+
 controller_xxx.py
  - controller_workstation
 	 - used for downsample dataset
@@ -25,9 +26,9 @@ controller_xxx.py
  - controller_aliyun.py
 	 - used in aliyun mode
 		 - similar to cluster mode
+
 dataset_preprocess.py
  - used for dataset process -- data down-sample
 	 - two main parts: dataset framerate and image resolution
 		 - read the original rosbag
-		 - handle each message according to the dataset pro-processing config
-		 - write the new rosbag
+		 - handle each message accord
